@@ -12,5 +12,18 @@
     </main>
 
     {% include custom-foot.html %}
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      // "{{ '/sw.js' | relative_url }}" resolves to "/tiboyce/sw.js" automatically
+      navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}")
+        .then(function(registration) {
+          console.log('ServiceWorker registered with scope:', registration.scope);
+        }, function(err) {
+          console.log('ServiceWorker registration failed:', err);
+        });
+    });
+  }
+</script>
   </body>
 </html>
